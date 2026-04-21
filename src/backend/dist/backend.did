@@ -1,0 +1,66 @@
+type UserProfile = 
+ record {
+   avatarUrl: opt text;
+   displayName: text;
+   id: UserId;
+   username: text;
+ };
+type UserPresence = 
+ record {
+   lastSeen: Timestamp;
+   status: PresenceStatus;
+   userId: UserId;
+ };
+type UserId = principal;
+type Timestamp = int;
+type PresenceStatus = 
+ variant {
+   offline;
+   online;
+ };
+type MessageId = nat;
+type Message = 
+ record {
+   conversationId: ConversationId;
+   id: MessageId;
+   senderId: UserId;
+   senderName: text;
+   "text": text;
+   timestamp: Timestamp;
+ };
+type ConversationPreview = 
+ record {
+   id: ConversationId;
+   lastMessageText: opt text;
+   lastMessageTimestamp: opt Timestamp;
+   participantIds: vec UserId;
+   participantNames: vec text;
+   updatedAt: Timestamp;
+ };
+type ConversationId = nat;
+type Conversation = 
+ record {
+   id: ConversationId;
+   lastMessage: opt Message;
+   participantIds: vec UserId;
+   updatedAt: Timestamp;
+ };
+service : {
+  getBulkPresence: (userIds: vec UserId) -> (vec UserPresence) query;
+  getConversation: (conversationId: ConversationId) ->
+   (opt Conversation) query;
+  getMessages: (conversationId: ConversationId) -> (vec Message) query;
+  getMyProfile: () -> (opt UserProfile) query;
+  getOrCreateConversation: (otherUserId: UserId) -> (ConversationId);
+  getTypingUsers: (conversationId: ConversationId, excludeUserId: UserId) ->
+   (vec UserId) query;
+  getUserPresence: (userId: UserId) -> (UserPresence) query;
+  getUserProfile: (userId: UserId) -> (opt UserProfile) query;
+  listConversations: () -> (vec ConversationPreview) query;
+  registerUser: (username: text, displayName: text) -> (UserProfile);
+  searchUsers: (searchTerm: text) -> (vec UserProfile) query;
+  sendMessage: (conversationId: ConversationId, "text": text) -> (Message);
+  setOffline: () -> ();
+  setOnline: () -> ();
+  setTyping: (conversationId: ConversationId, isTyping: bool) -> ();
+}

@@ -1,0 +1,23 @@
+{
+  "overview": "ChatHub is a social messaging platform where users can log in with Google, discover strangers to chat with, and hold real-time conversations. The clean, modern interface features a conversation sidebar, live online status, and a full message history panel — inspired by the familiar feel of Instagram, Facebook, and Twitter.",
+  "features": [
+    "Google login / sign-up on the homepage",
+    "Messaging dashboard with conversation list",
+    "Real-time instant messaging with message history",
+    "User online/offline status indicators",
+    "Search to find and start new conversations",
+    "Persistent messages that reload on refresh",
+    "Responsive layout for desktop and mobile"
+  ],
+  "category": "social-messaging",
+  "tags": [
+    "social",
+    "chat",
+    "messaging",
+    "real-time",
+    "social-media",
+    "video-call",
+    "voice-call"
+  ],
+  "last_updated": "2026-04-21T16:40:41.373Z"
+}
